@@ -48,7 +48,7 @@ class TextRotField extends ObjBase
           workingTile.rect = workingTile.origRect;
           println("Updating array");
           mapCopy.map[workingTile.x][workingTile.y] = new Tile(workingTile);
-          println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - RotationByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].rotationByte); //<>// //<>// //<>//
+          println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - RotationByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].rotationByte); //<>//
           
           
           

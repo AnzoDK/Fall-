@@ -22,16 +22,18 @@ class TileMap extends ObjBase
       {
         spriteArr[i] = st.SpriteLookUp((byte)(i+1));
       }
+      //image(spriteArr[0],0,0,64,64);
       int u = 0;
       while(len > 0)
       {
         for(int i = 0; i < 4; i++)
         {
+          int index = (u*4+i+1);
           push();
           image(spriteArr[u*4+i],128*u,i*64,64,64);
           fill(255);
           textSize(30);
-          text("" + (u*4+i),(u)*128+64,i*64-32);
+          text("" + index,(u)*128+64,i*64+32);
           pop();
           len--;
         }
