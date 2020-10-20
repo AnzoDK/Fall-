@@ -21,12 +21,12 @@ class spriteTable
       
       case 0x3:
         //Water with land side variant 1
-        return GetImg("rpg-pack/title/generic-rpg-tile65.png");
+        return GetImg("rpg-pack/tiles/generic-rpg-tile65.png");
         
         
       case 0x4:
         //Water with land side variant 2       
-        return GetImg("rpg-pack/title/generic-rpg-tile65.png");
+        return GetImg("rpg-pack/tiles/generic-rpg-tile65.png");
       
       default:
         return GetImg("rpg-pack/tiles/generic-rpg-Slice.png");
@@ -53,5 +53,8 @@ class spriteTable
          return 0;
     }
   }
-  
+   int GetSpriteCount()
+   {
+     return 4;
+   }
 }
