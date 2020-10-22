@@ -48,7 +48,7 @@ class TextRotField extends ObjBase
           workingTile.rect = workingTile.origRect;
           println("Updating array");
           mapCopy.map[workingTile.x][workingTile.y] = new Tile(workingTile);
-          println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - RotationByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].rotationByte); //<>//
+          println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - RotationByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].rotationByte);
           
           
           
@@ -76,7 +76,10 @@ class TextRotField extends ObjBase
     {
       text(fieldText, rect.x, rect.y+rect.h/2+/*This would be the height of the text - here im guessing*/10);
     }
-    line(rect.x+textWidth(fieldText), rect.y+15, rect.x+textWidth(fieldText), rect.y+rect.h-15);
+    if(enabled)
+    {
+      line(rect.x+textWidth(fieldText), rect.y+15, rect.x+textWidth(fieldText), rect.y+rect.h-15);
+    }
     //println("text is: " + text);
     //println("status: " + enabled);
     pop();
@@ -149,7 +152,10 @@ class TextSpriteField extends ObjBase
     fill(txtClr);
     textSize(fontSize);
     text(fieldText, rect.x, rect.y+rect.h/2+/*This would be the height of the text - here im guessing*/10);
-    line(rect.x+textWidth(fieldText), rect.y+15, rect.x+textWidth(fieldText), rect.y+rect.h-15);
+    if(enabled)
+    {
+      line(rect.x+textWidth(fieldText), rect.y+15, rect.x+textWidth(fieldText), rect.y+rect.h-15);
+    }
     //println("text is: " + text);
     //println("status: " + enabled);
     pop();

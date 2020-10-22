@@ -41,7 +41,7 @@ public int SimpleAtoi(String txt)
    //Only requires 3 letters to write, but a byte > 0xF (unsigned int 15) will need 4 letters. For example the unsigned int 16 would look like this 0x10.
    {
      println("Converting: " + txt);
-     char charToProcess; //The char we want to convert.
+     /*char charToProcess; //The char we want to convert.
      int processTimes; //The amount of letters to convert - We use the length of txt to determine this
      if(txt.length() == 4)
      { 
@@ -110,16 +110,32 @@ public int SimpleAtoi(String txt)
           result += 0;
         break;
       }
-   }
+   }*/
    }
    else
    {
      result = 0;
    }
+   String txt2 = txt.replace("0x","");
+   result = parseInt(txt2);
    println("Converted: " + txt + " To: " + result);
    return result; //Returning our converted Hex
 }
 public byte ToByte(String txt)
 {
   return (byte)SimpleAtoi(txt);
+}
+public static <T> T[] RevertArray(T[] arrToRevert)
+{
+  println("Reverting an array of size: " + arrToRevert.length);
+  for(int i = 0; i < arrToRevert.length;i++)
+  {
+    if(i != arrToRevert.length-i) //<>//
+    {
+      T tmp = arrToRevert[i];
+      arrToRevert[i] = arrToRevert[arrToRevert.length-1-i];
+      arrToRevert[arrToRevert.length-1-i] = tmp;
+    }
+  }
+  return arrToRevert;
 }

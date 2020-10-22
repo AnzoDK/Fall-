@@ -1,19 +1,22 @@
 int globalKey;
 boolean typeRead;
+boolean mouseDown;
 Editor e;
 ScreenManager sm;
 TileMap tm;
+SelTileMap selTm;
 
 void setup()
 {
-  size(1000,1000);
+  size(1000,800);
   e = new Editor();
   tm = new TileMap();
+  selTm = new SelTileMap();
   sm = new ScreenManager();
   sm.Add(e);
   sm.Add(tm);
-  sm.GetObjAt(0).enabled = false;
-  sm.GetObjAt(1).enabled = true;
+  sm.Add(selTm);
+  sm.SetActiveObj(0);
   //frameRate(5);
 }
 void draw()
@@ -26,6 +29,7 @@ void draw()
     
   }
   typeRead = false;
+  mouseDown = false;
 }
 void keyTyped()
 {
@@ -42,4 +46,8 @@ void keyPressed()
   {
     globalKey = key;
   }
+}
+void mouseClicked()
+{
+ mouseDown = true;
 }

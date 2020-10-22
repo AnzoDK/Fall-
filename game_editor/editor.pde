@@ -19,15 +19,29 @@ class Editor extends ObjBase
   boolean requestReload = true;
   TextBox tb;
   TileMapButton tmBtn;
+  SaveButton sBtn;
+  DrawModeToggleButton dmBtn;
   TextRotField rotByteField;
   TextSpriteField spriteByteField;
+  boolean drawModeTileSelected = false;
+  int drawModeTile;
   Editor()
   {
     
     //Initing the base object
     super(new Rect(width/2,height/2,width,height));
+    
+    //Initing the rest of the objects
+    drawModeTile = 0;
     tmBtn = new TileMapButton(new Rect(100,height-50,100,50));
+    dmBtn = new DrawModeToggleButton(new Rect(205,height-50,120,50));
+    sBtn = new SaveButton(new Rect(0,height-50,100,50));
+    dmBtn.btnTxt = "Toggle Draw";
+    sBtn.btnTxt = "Save Map";
     tmBtn.btnTxt = "To TileMap";
+    dmBtn.btnTxtFntSize = 15;
+    tmBtn.btnTxtFntSize = 15;
+    sBtn.btnTxtFntSize = 15;
     //Initilizaion of decared variables, and some of the gloal ones.
     tileMapRect = new Rect(0,0,16,16);
     Rect tbR = new Rect(rect.x+10,rect.y,rect.w/2-20,rect.h/10);
@@ -64,10 +78,10 @@ class Editor extends ObjBase
       //Popping back the translate, fill and rectmode functions.
       pop();
       background(0);
-    
+      dmBtn.Draw();
       //Drawing the textbox
       tb.Draw();
-      
+      sBtn.Draw();
       //Draw the TileMap Button
       tmBtn.Draw();
       
@@ -114,11 +128,22 @@ class Editor extends ObjBase
   if(enabled)
   {
       //Update related classes
+      dmBtn.Update();
       tb.Update();
       tmBtn.Update();
+      sBtn.Update();
       rotByteField.Update();
       spriteByteField.Update();
     
+      if(dmBtn.toggled && !drawModeTileSelected)
+      {
+         sm.SetActiveObj(2);
+      }
+      if(!dmBtn.toggled)
+      {
+        drawModeTileSelected = false;
+      }
+      
       //Check if we have a selected tile - so we don't crash
       if(tb.selectedTile != null)
       {

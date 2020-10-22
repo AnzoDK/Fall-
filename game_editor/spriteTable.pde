@@ -7,27 +7,36 @@ public PImage GetImg(String path)
 
 class spriteTable
 {
+  int spritesInUse = 7;
   PImage SpriteLookUp(byte b)
   {
     //This is a table we use to find the sprite we need to based on a byte
     switch(b)
     {
-        case 0x1:
+        case 0x0:
         //
         return GetImg("rpg-pack/tiles/generic-rpg-Slice.png");
-      case 0x2:
+      case 0x1:
         //default water tile - not pretty and should be replaced
         return GetImg("rpg-pack/tiles/generic-rpg-tile-waterfall01.png");
       
-      case 0x3:
+      case 0x2:
         //Water with land side variant 1
         return GetImg("rpg-pack/tiles/generic-rpg-tile65.png");
         
-        
+      case 0x3:
+        //Water with land side variant 2       
+        return GetImg("rpg-pack/tiles/generic-rpg-tile66.png");
+
       case 0x4:
         //Water with land side variant 2       
-        return GetImg("rpg-pack/tiles/generic-rpg-tile65.png");
+        return GetImg("rpg-pack/tiles/generic-rpg-tile67.png");
+      case 0x5:
+        return GetImg("rpg-pack/tiles/generic-rpg-tile69.png");
       
+      case 0x6:
+        return GetImg("rpg-pack/tiles/generic-rpg-tile-water.png");
+
       default:
         return GetImg("rpg-pack/tiles/generic-rpg-Slice.png");
     }
@@ -55,6 +64,6 @@ class spriteTable
   }
    int GetSpriteCount()
    {
-     return 4;
+     return spritesInUse;
    }
 }

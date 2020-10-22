@@ -45,10 +45,19 @@ class TextBox
               }
               if ((mousePressed && (mouseButton == LEFT)))
               {
-                locked = true;
-                selectedTile = new Tile(mapCopy.map[i][u]);
-                selectedTile.x = i;
-                selectedTile.y = u;
+                if(!e.dmBtn.toggled)
+                {
+                  locked = true;
+                  selectedTile = new Tile(mapCopy.map[i][u]);
+                  selectedTile.x = i;
+                  selectedTile.y = u;
+                }
+                else
+                {
+                  //mapCopy.map[i][u] = new Tile(mapCopy.map[i][u]);
+                  selectedTile = new Tile(mapCopy.map[i][u]);
+                  mapCopy.map[i][u] = new Tile(selectedTile.rect,selectedTile.rotationByte,(byte)e.drawModeTile);
+                }
                 
               }
             }
