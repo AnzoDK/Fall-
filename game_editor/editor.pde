@@ -126,7 +126,7 @@ class Editor extends ObjBase
       }
       if(dmBtn.toggled && !drawModeTileSelected)
       {
-         sm.SetActiveObj(2); //<>//
+         sm.SetActiveObj(2);
       }
       dmBtn.Update();
       

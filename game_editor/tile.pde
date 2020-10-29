@@ -25,7 +25,7 @@ class Tile extends ObjBase
      sprite = new spriteTable().SpriteLookUp(b);
      origRect = rect;
    }
-   Tile(Rect r, byte rotByte, byte b)
+   Tile(Rect r, byte b, byte rotByte)
    {
      super(r,new Rot(new spriteTable().RotationTable(rotByte)));
      rotationByte = rotByte;

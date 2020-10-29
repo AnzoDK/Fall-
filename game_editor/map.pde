@@ -66,9 +66,14 @@ class Map
     */
     int mapDataOffset = 4;
     Tile[][] tiles = new Tile[h][];
+    for(int z = 0; z < h;z++)
+    {
+      tiles[z] = new Tile[w];
+    }
+    int debugCounter = 0;
     for(int cH = 0; cH < h; cH++)
     {
-      tiles[cH] = new Tile[w];
+      
       int tileI = 0;
       for(int i = mapDataOffset; i < w*2+mapDataOffset;i++)
       {
@@ -78,12 +83,16 @@ class Map
         spawnRect.w = defaultRect.w;
         spawnRect.h = defaultRect.h;
         //The second argument passed here is the rotation byte, whos use is explained in the tile.pde file
-        tiles[cH][tileI] = new Tile(spawnRect,mapBytes[i+(cH*h)+1],mapBytes[i+(cH*h)]);
+        //mapBytes[offset+((i-4)*mapCopy.w*2)+u]
+        tiles[cH][tileI] = new Tile(spawnRect,mapBytes[i+(cH*(w*2))],mapBytes[i+(cH*(w*2))+1]);
+        if(DEBUG){println("building Tile " + cH + ", " + tileI + " using index " + (i+(cH*(w*2))) + " for next sprite and " + (i+(cH*(w*2))+1) + " for next rotation");}
         i++;
         tileI++;
+        debugCounter++;
         
-      }
+      } 
     }
+    if(DEBUG){println("Loaded " + debugCounter + " tiles in total");}
     return tiles;
   }
   void Draw()

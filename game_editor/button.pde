@@ -111,17 +111,21 @@ class SaveButton extends Button
     
     //This function collapses the 2D array into a 1D array, with a data offset of 4 - this is due to the first 4 bytes being used to store the size
     //Of the map
-    for(int i = 0+offset; i < mapCopy.h+offset;i++) //<>//
+    int totalTileCounter = 0;
+    for(int i = 0+offset; i < mapCopy.h+offset;i++)
     {
        int tileindex = 0;
        for(int u = 0; u < mapCopy.w*2;u++)
        {
-         if(DEBUG){println("Tile: " + (i-4) + ", " + u + " on MapBytes index: " + (offset+((i-4)*mapCopy.w)+u));}
-         mapBytes[offset+((i-4)*mapCopy.w)+u] = mapCopy.map[i-4][tileindex].spriteByte;
+         
+         mapBytes[offset+((i-4)*mapCopy.w*2)+u] = mapCopy.map[i-4][tileindex].spriteByte;
          if(DEBUG){println("SpriteByte: " + mapCopy.map[i-4][tileindex].spriteByte + ", " + mapBytes[offset+((i-4)*mapCopy.w)+u]);}
-         mapBytes[offset+((i-4)*mapCopy.w)+u+1] = mapCopy.map[i-4][tileindex].rotationByte;
+         mapBytes[offset+((i-4)*mapCopy.w*2)+u+1] = mapCopy.map[i-4][tileindex].rotationByte;
          u++;
          tileindex++;
+         totalTileCounter++;
+         if(DEBUG){println("Tile: " + (i-4) + ", " + u + " on MapBytes index: " + (offset+((i-4)*mapCopy.w*2)+u));}
+         if(DEBUG){println("Total tiles processed: " + totalTileCounter + " - Tile index: " + tileindex);}
        }
     }
     
