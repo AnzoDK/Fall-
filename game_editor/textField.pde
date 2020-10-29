@@ -43,12 +43,12 @@ class TextRotField extends ObjBase
         {
           workingTile.rotationByte = ToByte(fieldText);
           workingTile.rotation = new Rot(new spriteTable().RotationTable(workingTile.rotationByte));
-          println("Updating Tile: " + workingTile.x + ", " + workingTile.y);
+          if(DEBUG){println("Updating Tile: " + workingTile.x + ", " + workingTile.y);}
           println("Resetting Rect to pre-edit tile rect...");
           workingTile.rect = workingTile.origRect;
-          println("Updating array");
+          if(DEBUG){println("Updating array");}
           mapCopy.map[workingTile.x][workingTile.y] = new Tile(workingTile);
-          println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - RotationByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].rotationByte);
+          if(DEBUG){println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - RotationByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].rotationByte);}
           
           
           
@@ -130,12 +130,12 @@ class TextSpriteField extends ObjBase
           workingTile.spriteByte = ToByte(fieldText);
           workingTile.sprite = new spriteTable().SpriteLookUp(workingTile.spriteByte);
           //mapCopy.Draw();
-          println("Updating Tile: " + workingTile.x + ", " + workingTile.y);
-          println("Resetting Rect to pre-edit tile rect...");
+          if(DEBUG){println("Updating Tile: " + workingTile.x + ", " + workingTile.y);}
+          if(DEBUG){println("Resetting Rect to pre-edit tile rect...");}
           workingTile.rect = workingTile.origRect;
-          println("Updating array");
+          if(DEBUG){println("Updating array");}
           mapCopy.map[workingTile.x][workingTile.y] = new Tile(workingTile);
-          println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - SpriteByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].spriteByte);
+          if(DEBUG){println("Tile: " + workingTile.x + ", " + workingTile.y + " exists - SpriteByte on ArrayTile: " + mapCopy.map[workingTile.x][workingTile.y].spriteByte);}
         }
       } 
       else

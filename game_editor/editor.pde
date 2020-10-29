@@ -60,23 +60,8 @@ class Editor extends ObjBase
   {
     if(enabled)
     {
+      
       //Pushing to make sure that we don't keep setting we don't want to affect every object and function.
-      push();
-    
-      //Setting origin to center
-      //translate(width/2,height/2);
-    
-      //Declaring that creating rects from the corners is annoying, so we change that to CENTER instead
-      //rectMode(CENTER);
-    
-      //Set the rect color to black
-      //fill(0);
-    
-      //Creating a rect at the size of the screen.
-      //rect(0,0,width,height);
-    
-      //Popping back the translate, fill and rectmode functions.
-      pop();
       background(0);
       dmBtn.Draw();
       //Drawing the textbox
@@ -128,21 +113,22 @@ class Editor extends ObjBase
   if(enabled)
   {
       //Update related classes
-      dmBtn.Update();
+      
       tb.Update();
       tmBtn.Update();
       sBtn.Update();
       rotByteField.Update();
       spriteByteField.Update();
-    
-      if(dmBtn.toggled && !drawModeTileSelected)
-      {
-         sm.SetActiveObj(2);
-      }
+      
       if(!dmBtn.toggled)
       {
         drawModeTileSelected = false;
       }
+      if(dmBtn.toggled && !drawModeTileSelected)
+      {
+         sm.SetActiveObj(2); //<>//
+      }
+      dmBtn.Update();
       
       //Check if we have a selected tile - so we don't crash
       if(tb.selectedTile != null)

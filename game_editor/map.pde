@@ -40,7 +40,7 @@ class Map
     w = (mapBytes[0] << 8) | mapBytes[1];
     h = (mapBytes[2] << 8) | mapBytes[3];
     
-    println("Creating map of size: " + w + ", " + h);
+    if(DEBUG){println("Creating map of size: " + w + ", " + h);}
     
     
     //In here you'll see a few values multiplied by 2. This is because the way that the map is layed out.

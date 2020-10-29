@@ -8,6 +8,7 @@ class Button extends ObjBase
   int btnTxtFntSize;
   private color inUseClr;
   private color inUseTxtClr;
+  private int debugCounter = 0;
   Button(Rect r)
   {
     super(r);
@@ -34,27 +35,35 @@ class Button extends ObjBase
   
   void Update()
   {
-    inUseClr = bgBtnClr;
-    inUseTxtClr = btnTxtClr;
-    if((mouseX >= rect.x && mouseX <= rect.x+rect.w) && (mouseY >= rect.y && mouseY <= rect.y+rect.h))
+    if(enabled)
     {
-      Hover();
-      if (mousePressed && (mouseButton ==  LEFT) && mouseDown)
+      inUseClr = bgBtnClr;
+      inUseTxtClr = btnTxtClr;
+      if((mouseX >= rect.x && mouseX <= rect.x+rect.w) && (mouseY >= rect.y && mouseY <= rect.y+rect.h))
       {
-        OnClick();
+        Hover();
+        //if(DEBUG){println("HOVERING " + debugCounter);debugCounter++;}
+        if (mousePressed && (mouseButton ==  LEFT) && useClick())
+        {
+          OnClick();
+          if(DEBUG){println("Clicked");}
+        }
       }
     }
   }
   
   void Draw()
   {
-    push();
-    fill(inUseClr);
-    rect(rect.x-5,rect.y-5,rect.w,rect.h);
-    fill(inUseTxtClr);
-    textSize(btnTxtFntSize);
-    text(btnTxt,rect.x+3,rect.y+rect.h-10);
-    pop();
+    if(enabled)
+    {
+      push();
+      fill(inUseClr);
+      rect(rect.x-5,rect.y-5,rect.w,rect.h);
+      fill(inUseTxtClr);
+      textSize(btnTxtFntSize);
+      text(btnTxt,rect.x+3,rect.y+rect.h-10);
+      pop();
+    }
   }
   
 }
@@ -67,7 +76,7 @@ class TileMapButton extends Button
   void OnClick()
   {
     background(0);
-    sm.SetActiveObj(0);
+    sm.SetActiveObj(1);
   }
 }
 
@@ -91,7 +100,7 @@ class SaveButton extends Button
   }
     void OnClick()
   {
-    println("Overwriting map");
+    if(DEBUG){println("Overwriting map");}
     String path = e.tb.text;
     byte mapBytes[] = new byte[((mapCopy.w*mapCopy.h)*2)+4];
     mapBytes[0] = (byte)(mapCopy.w >> 8);
@@ -107,10 +116,10 @@ class SaveButton extends Button
        int tileindex = 0;
        for(int u = 0; u < mapCopy.w*2;u++)
        {
-         println("Tile: " + (i-4) + ", " + u + " on MapBytes index: " + (offset+((i-4)*mapCopy.w)+u));
+         if(DEBUG){println("Tile: " + (i-4) + ", " + u + " on MapBytes index: " + (offset+((i-4)*mapCopy.w)+u));}
          mapBytes[offset+((i-4)*mapCopy.w)+u] = mapCopy.map[i-4][tileindex].spriteByte;
-         println("SpriteByte: " + mapCopy.map[i-4][tileindex].spriteByte + ", " + mapBytes[offset+((i-4)*mapCopy.w)+u]);
-         mapBytes[offset+((i-4)*mapCopy.w)+u+1] = mapCopy.map[i-4][tileindex].rotationByte;//This had some problems, but should be fine now
+         if(DEBUG){println("SpriteByte: " + mapCopy.map[i-4][tileindex].spriteByte + ", " + mapBytes[offset+((i-4)*mapCopy.w)+u]);}
+         mapBytes[offset+((i-4)*mapCopy.w)+u+1] = mapCopy.map[i-4][tileindex].rotationByte;
          u++;
          tileindex++;
        }
@@ -128,24 +137,32 @@ class DrawModeToggleButton extends Button
   DrawModeToggleButton(Rect r)
   {
     super(r);
+    toggled = false;
     
   }
-  void OnClick()
+  void OnClick()//Pops twice?
   {
-    toggled = !toggled;
+    if(enabled)
+    {
+      toggled = !toggled;
+      if(DEBUG){println("Toggled to: " + toggled);}
+    }
   }
   void Draw()
   {
-    if(toggled)
+    if(enabled)
     {
-      push();
-      stroke(124,252,0);
-      super.Draw();
-      pop();
-    }
-    else
-    {
-      super.Draw();
+      if(toggled)
+      {
+        push();
+        stroke(124,252,0);
+        super.Draw();
+        pop();
+      }
+      else
+      {
+        super.Draw();
+      }
     }
     
     

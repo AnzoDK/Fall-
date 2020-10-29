@@ -1,4 +1,11 @@
 int globalKey;
+
+int clicks;
+
+boolean DEBUG = true;
+
+int buttonClickDelay = 15; //The amount of frames we wait before registering a new click
+
 boolean typeRead;
 boolean mouseDown;
 Editor e;
@@ -30,6 +37,7 @@ void draw()
   }
   typeRead = false;
   mouseDown = false;
+
 }
 void keyTyped()
 {
@@ -50,4 +58,26 @@ void keyPressed()
 void mouseClicked()
 {
  mouseDown = true;
+ if(clicks == 0)
+ {
+   clicks++;
+ }
+ 
 }
+ void mousePressed()
+ {
+
+ }
+ //this must be the worst idea ever
+ boolean useClick()
+ {
+   if(clicks <= 0)
+   {
+     return false;
+   }
+   else
+   {
+     clicks--;//Consumes a click
+     return true;
+   }
+ }

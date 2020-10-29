@@ -40,7 +40,7 @@ public int SimpleAtoi(String txt)
    if(txt.length() == 3 || txt.length() == 4) // We check for a length of either 3 or 4. This is because a byte that represents a number <= 0xF (unsigned int 15)
    //Only requires 3 letters to write, but a byte > 0xF (unsigned int 15) will need 4 letters. For example the unsigned int 16 would look like this 0x10.
    {
-     println("Converting: " + txt);
+     if(DEBUG){println("Converting: " + txt);}
      /*char charToProcess; //The char we want to convert.
      int processTimes; //The amount of letters to convert - We use the length of txt to determine this
      if(txt.length() == 4)
@@ -118,7 +118,7 @@ public int SimpleAtoi(String txt)
    }
    String txt2 = txt.replace("0x","");
    result = parseInt(txt2);
-   println("Converted: " + txt + " To: " + result);
+   if(DEBUG){println("Converted: " + txt + " To: " + result);}
    return result; //Returning our converted Hex
 }
 public byte ToByte(String txt)

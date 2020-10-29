@@ -21,7 +21,7 @@ class TextBox
     mapRect = new Rect();
     m = null;
     locked = false;
-    println("New TextBox Intilized");
+    if(DEBUG){println("New TextBox Intilized");}
   }
   void Update()
   {
@@ -96,7 +96,7 @@ class TextBox
         } 
         else
         {
-          println("Map could not be loaded - File may not exist");
+          if(DEBUG){println("Map could not be loaded - File may not exist");}
         }
         enabled = false;
       } 

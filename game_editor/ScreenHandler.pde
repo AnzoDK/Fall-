@@ -1,6 +1,6 @@
 class TileMap extends ObjBase
 {
-  spriteTable st;
+  spriteTable st; //Due to java being Java - making a static function was way harder than just doing this madness
   BackToEditor btn;
   Rect rectArr[];
   TileMap()
@@ -19,9 +19,10 @@ class TileMap extends ObjBase
         spriteArr[i] = st.SpriteLookUp((byte)(i));
       }
       //image(spriteArr[0],0,0,64,64);
+      /*
       int u = 0;
        
-      for(int z = 0; z < len;/*so that we don't go out of bounds*/z++)
+      for(int z = 0; z < len;z++)
       {
         for(int i = 0; i < 4; i++)
         {
@@ -34,6 +35,27 @@ class TileMap extends ObjBase
         u++;
       }
       //rectArr = RevertArray(rectArr);
+      */
+      int u = 0;
+      int j = 0; //This is a bad way to count the sprite we are at...
+      for(int z = 0; z < len;z++)
+      {
+          for(int i = 0; i < 4; i++)
+          {
+            len--;
+            if(len >= 0)
+            {
+              push();
+              rectArr[j] = new Rect(128*z,i*64,64,64);
+              fill(255);
+              textSize(30);
+              text("" + j,(u)*128+64,i*64+32);
+              pop();
+              j++;
+            }
+          }
+          u++;
+      }
   }
   void Draw()
   {
@@ -42,28 +64,32 @@ class TileMap extends ObjBase
     {
       background(0);
       btn.Draw();
-      int len = st.GetSpriteCount();
-      PImage spriteArr[] = new PImage[len]; //We do +1, because there is no sprite 0 don't start a zero
+      int len = st.GetSpriteCount(); // Gets the length of the sprite table
+      PImage spriteArr[] = new PImage[len];
       for(int i = 0; i < len; i++)
       {
         spriteArr[i] = st.SpriteLookUp((byte)(i));
       }
       //image(spriteArr[0],0,0,64,64);
       int u = 0;
+      int j = 0; //This is a bad way to count the sprite we are at...
       for(int z = 0; z < len;z++)
       {
-        for(int i = 0; i < 4; i++)
-        {
-          int index = (u*4+i+1);
-          push();
-          image(spriteArr[z*4+i],128*z,i*64,64,64);
-          fill(255);
-          textSize(30);
-          text("" + index,(u)*128+64,i*64+32);
-          pop();
-          len--;
-        }
-        u++;
+          for(int i = 0; i < 4; i++)
+          {
+            len--;
+            if(len >= 0)
+            {
+              push();
+              image(spriteArr[j],128*z,i*64,64,64);
+              fill(255);
+              textSize(30);
+              text("" + j,(u)*128+64,i*64+32);
+              pop();
+              j++;
+            }
+          }
+          u++;
       }
       
     
@@ -91,17 +117,21 @@ class SelTileMap extends TileMap
     if(enabled)
     {
       btn.Update();
-      println(rectArr.length);
-      for(int i = 0; i < 6;i++)
+      //if(DEBUG){println(rectArr.length);}
+      for(int i = 0; i < rectArr.length;i++)
       {
-         if((mouseX >= rectArr[i].x && mouseX <= rectArr[i].x+rectArr[i].w) && (mouseY >= rectArr[i].y && mouseY <= rectArr[i].y+rectArr[i].h)) //<>//
+         if((mouseX >= rectArr[i].x && mouseX <= rectArr[i].x+rectArr[i].w) && (mouseY >= rectArr[i].y && mouseY <= rectArr[i].y+rectArr[i].h))
          {
-           if (mousePressed && (mouseButton ==  LEFT) && mouseDown) //<>//
+           if(DEBUG){println("Hovering over TileRect " + i);}
+           if (mousePressed && (mouseButton ==  LEFT))
            {
-             println("Selected a tile: " + (i)); //<>//
-             e.drawModeTile = i; //<>//
-             e.drawModeTileSelected = true; //<>//
-             sm.SetActiveObj(0); //<>//
+             if(DEBUG)
+             {
+               println("Selected a tile: " + (i));
+             }
+             e.drawModeTile = i;
+             e.drawModeTileSelected = true;
+             sm.SetActiveObj(0);
            }
          }
       }
