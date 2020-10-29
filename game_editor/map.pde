@@ -90,6 +90,7 @@ class Map
         tileI++;
         debugCounter++;
         
+        
       } 
     }
     if(DEBUG){println("Loaded " + debugCounter + " tiles in total");}
