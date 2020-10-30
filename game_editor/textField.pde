@@ -80,8 +80,6 @@ class TextRotField extends ObjBase
     {
       line(rect.x+textWidth(fieldText), rect.y+15, rect.x+textWidth(fieldText), rect.y+rect.h-15);
     }
-    //println("text is: " + text);
-    //println("status: " + enabled);
     pop();
   }
 }

@@ -25,6 +25,8 @@ class Editor extends ObjBase
   TextSpriteField spriteByteField;
   boolean drawModeTileSelected = false;
   int drawModeTile;
+  Background bg;
+  
   Editor()
   {
     
@@ -33,6 +35,7 @@ class Editor extends ObjBase
     
     //Initing the rest of the objects
     drawModeTile = 0;
+    bg = new Background();
     tmBtn = new TileMapButton(new Rect(100,height-50,100,50));
     dmBtn = new DrawModeToggleButton(new Rect(205,height-50,120,50));
     sBtn = new SaveButton(new Rect(0,height-50,100,50));
@@ -61,8 +64,9 @@ class Editor extends ObjBase
     if(enabled)
     {
       
-      //Pushing to make sure that we don't keep setting we don't want to affect every object and function.
       background(0);
+      //Drawing the background
+      bg.Draw();
       dmBtn.Draw();
       //Drawing the textbox
       tb.Draw();
@@ -112,23 +116,24 @@ class Editor extends ObjBase
   {
   if(enabled)
   {
-      //Update related classes
-      
+      //Update related classes and objects
+      bg.Update();
       tb.Update();
       tmBtn.Update();
       sBtn.Update();
       rotByteField.Update();
       spriteByteField.Update();
       
+      //Check if we should be using drawmode
       if(!dmBtn.toggled)
       {
-        drawModeTileSelected = false;
+        drawModeTileSelected = false; //if we don't have drawmode enabled, we clear the selected tile stat, so that we can pick a new tile when we toggle it on again
       }
-      if(dmBtn.toggled && !drawModeTileSelected)
+      if(dmBtn.toggled && !drawModeTileSelected)//Check if we need to select a tile for draw mode
       {
-         sm.SetActiveObj(2);
+         sm.SetActiveObj(2); //Switch to tileSelection screen
       }
-      dmBtn.Update();
+      dmBtn.Update(); //Update the toggleswitch after the select a tile - Or it could mess with stuff
       
       //Check if we have a selected tile - so we don't crash
       if(tb.selectedTile != null)
@@ -136,8 +141,6 @@ class Editor extends ObjBase
         //Updating the fields working tiles with the current selected tile
         rotByteField.workingTile = tb.selectedTile;
         spriteByteField.workingTile = tb.selectedTile;
-        //mapCopy.map[spriteByteField.workingTile.x][spriteByteField.workingTile.y] = spriteByteField.workingTile; // <--- To be deleted
-        //mapCopy.map[tb.selectedTile.x][tb.selectedTile.y] = tb.selectedTile; // <---- To be deleted
       
         //Check if our textfields are disabled - and if they are we change the text inside them to represent the state of the selected tile
         if(!rotByteField.enabled)

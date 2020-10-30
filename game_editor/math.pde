@@ -130,7 +130,7 @@ public static <T> T[] RevertArray(T[] arrToRevert)
   println("Reverting an array of size: " + arrToRevert.length);
   for(int i = 0; i < arrToRevert.length;i++)
   {
-    if(i != arrToRevert.length-i) //<>// //<>//
+    if(i != arrToRevert.length-i) //<>//
     {
       T tmp = arrToRevert[i];
       arrToRevert[i] = arrToRevert[arrToRevert.length-1-i];

@@ -1,4 +1,4 @@
-class IOController
+class IOController //Not really used as writing and reading bytes was waaaaaaaay easier than I expected
 {
   void WriteByte(byte b)
   {

@@ -1,4 +1,4 @@
-class ObjBase
+class ObjBase // the base for the whole project - most classes are extentions of this class
 {
   Rect rect;
   Rot rotation;

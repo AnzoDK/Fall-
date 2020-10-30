@@ -1,4 +1,4 @@
-class Rect
+class Rect //A small class used for storing x,y,w,h of any object
 {
   float x,y,w,h;
   Rect(float _x, float _y, float _w, float _h)
@@ -34,7 +34,7 @@ class Rect
   }
   
 }
-class Rot
+class Rot // just stores rotation in radians
 {
   int rotation = 0;  
   Rot()
