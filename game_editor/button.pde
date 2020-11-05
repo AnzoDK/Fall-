@@ -106,7 +106,6 @@ class SaveButton extends Button
     if(DEBUG){println("Overwriting map");} //debug
     String path = e.tb.text; //grap the text of the editors textbox to use as path for the save
     byte mapBytes[] = new byte[((mapCopy.w*mapCopy.h)*2)+4]; //Create a 1D array to store the bytes at the size of (map_width * map map_height)*bytes_per_tile+offeset
-    
     //Set the first 4 bytes to represent the size of the map
     mapBytes[0] = (byte)(mapCopy.w >> 8); /*There is no reason to do this but it works so I won't touch it - a better way would be to just assign mapBytes[1] = w and mapBytes[3] = h but that would only work for numbers less then 255, so this code is only usefull if
     You for some reason wants a map that takes your whole RAM module*/
@@ -138,6 +137,8 @@ class SaveButton extends Button
     
     
     
+    String compressedPath = path.replace(".txt","_compressed.txt");
+    saveBytes(compressedPath,Compressor.MapCompress(mapBytes));
     saveBytes(path,mapBytes); //Write bytes to file
   }
 }
