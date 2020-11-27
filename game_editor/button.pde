@@ -136,9 +136,9 @@ class SaveButton extends Button
     
     
     
-    
+    Compressor Com = new Compressor();
     String compressedPath = path.replace(".txt","_compressed.txt");
-    saveBytes(compressedPath,Compressor.MapCompress(mapBytes));
+    saveBytes(compressedPath,Com.MapCompress(mapBytes));
     saveBytes(path,mapBytes); //Write bytes to file
   }
 }
